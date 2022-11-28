@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_components/components/circle_widget.dart';
-import 'package:flutter_components/components/list_tile_widget.dart';
+import 'package:flutter_components/screens/circle_widget_screen.dart';
+import 'package:flutter_components/screens/item_widget_screen.dart';
+import 'package:flutter_components/shared/components/circle_widget.dart';
+import 'package:flutter_components/shared/components/list_tile_widget.dart';
+import 'package:flutter_components/shared/resources/navigation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,11 +15,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Components',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter Components'),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -29,23 +33,45 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
       body: SingleChildScrollView(
         child: Column(
-           children: const <Widget> [
-             SizedBox(height: 50,),
-             CircleWidget(),
-             Divider(height: 30,color: Color.fromARGB(255, 93, 223, 143),),
-             ListTileWidget(),
-             Divider(height: 30,color: Color.fromARGB(255, 93, 223, 143),),
-           ],
+          children: <Widget>[
+            const SizedBox(
+              height: 10,
+            ),
+            Card(
+              child: ListTile(
+                title: const Text("Circle Widget"),
+                leading: const Icon(
+                  Icons.circle,
+                  size: 30,
+                ),
+                onTap: () {
+                  Navigator.of(context)
+                      .push(createRoute(const CircleWidgetScreen()));
+                },
+              ),
+            ),
+            Card(
+              child: ListTile(
+                title: const Text("Item Widget"),
+                leading: const Icon(
+                  Icons.insert_emoticon,
+                  size: 30,
+                ),
+                onTap: () {
+                  Navigator.of(context)
+                      .push(createRoute(const ItemWidgetScreen()));
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
